@@ -24,6 +24,12 @@ class Player:
 
         self.score = 0
 
+        self.float_offset = 0
+        self.float_direction = 1
+        self.frame = 0
+        self.frame_timer = 0
+        self.frame_speed = 7
+
     def draw(self, window):
         pygame.draw.rect(window, self.color, self.rect)
 
@@ -113,3 +119,16 @@ class Player:
         clone.brain = self.brain.clone()
         clone.brain.generate_net()
         return clone
+
+    # IDLE FLOAT (before start)
+    def idle_float(self):
+        self.float_offset += 0.3 * self.float_direction
+        if abs(self.float_offset) > 6:
+            self.float_direction *= -1
+        self.animate()
+
+    def animate(self):
+        self.frame_timer += 1
+        if self.frame_timer >= self.frame_speed:
+            self.frame = (self.frame + 1) % len(self.frames)
+            self.frame_timer = 0

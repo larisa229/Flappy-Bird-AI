@@ -1,52 +1,88 @@
 import pygame
 from sys import exit
 import config
-from game.components import Ground, Pipes
-from ai.population import Population
+from screens.title_screen import TitleScreen
 
-pygame.init()
-clock = pygame.time.Clock()
-population = Population(100)
 
-def generate_pipes():
-    config.pipes.append(Pipes(config.window_width))
+class Game:
+    def __init__(self):
+        pygame.init()
+        self.screen = config.window
+        self.clock = pygame.time.Clock()
+        self.current_screen = None
 
-def quit_game():
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            exit()
+        self.pending_mode = None
+        self.last_score = 0
+
+    def set_screen(self, screen):
+        self.current_screen = screen
+
+    def run(self):
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    exit()
+
+                action = self.current_screen.handle_event(event)
+                if action:
+                    self.handle_action(action)
+
+            action_from_update = self.current_screen.update()
+            if action_from_update:
+                self.handle_action(action_from_update)
+                continue
+
+            self.current_screen.draw()
+
+            pygame.display.update()
+            self.clock.tick(60)
+
+
+    def handle_action(self, action):
+
+        # Title → Tutorial
+        if action == "manual_tutorial":
+            self.pending_mode = "manual"
+            from screens.tutorial_screen import TutorialScreen
+            self.set_screen(TutorialScreen(self, mode="manual"))
+
+        elif action == "auto_tutorial":
+            self.pending_mode = "auto"
+            from screens.tutorial_screen import TutorialScreen
+            self.set_screen(TutorialScreen(self, mode="auto"))
+
+        # Tutorial → Game
+        elif action == "start_game":
+            from screens.game_screen import GameScreen
+            self.set_screen(GameScreen(self, mode=self.pending_mode))
+
+        # Game → Game Over
+        elif action == "game_over":
+            from screens.game_over_screen import GameOverScreen
+            self.set_screen(GameOverScreen(self, score=self.last_score))
+
+        # Game Over → Main Menu
+        elif action == "menu":
+            from screens.title_screen import TitleScreen
+            self.set_screen(TitleScreen(self))
+
+        # Game Over → Restart in same mode
+        elif action == "restart":
+            from screens.game_screen import GameScreen
+            self.set_screen(GameScreen(self, mode=self.pending_mode))
+
+        # Highscore Screen
+        # elif action == "scores":
+        #     from screens.scores_screen import ScoresScreen
+        #     self.set_screen(ScoresScreen(self))
+
 
 def main():
-    pipes_spawn_time = 10
+    game = Game()
+    game.set_screen(TitleScreen(game))
+    game.run()
 
-    while True:
-        quit_game()
 
-        config.window.fill((0, 0, 0))
-
-        # Spawn ground
-        config.ground.draw(config.window)
-
-        # Spawn pipes
-        if pipes_spawn_time <= 0:
-            generate_pipes()
-            pipes_spawn_time = 200
-        pipes_spawn_time -= 1
-
-        for p in config.pipes:
-            p.draw(config.window)
-            p.update()
-            if p.off_screen:
-                config.pipes.remove(p)
-
-        if not population.extinct():
-            population.update_live_players()
-        else:
-            config.pipes.clear()
-            population.natural_selection()
-
-        clock.tick(60)
-        pygame.display.flip()
-
-main()
+if __name__ == "__main__":
+    main()
