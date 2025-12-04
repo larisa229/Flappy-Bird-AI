@@ -41,7 +41,6 @@ class Game:
 
     def handle_action(self, action):
 
-        # Title → Tutorial
         if action == "manual_tutorial":
             self.pending_mode = "manual"
             from screens.tutorial_screen import TutorialScreen
@@ -52,30 +51,26 @@ class Game:
             from screens.tutorial_screen import TutorialScreen
             self.set_screen(TutorialScreen(self, mode="auto"))
 
-        # Tutorial → Game
         elif action == "start_game":
             from screens.game_screen import GameScreen
             self.set_screen(GameScreen(self, mode=self.pending_mode))
 
-        # Game → Game Over
         elif action == "game_over":
             from screens.game_over_screen import GameOverScreen
             self.set_screen(GameOverScreen(self, score=self.last_score))
 
-        # Game Over → Main Menu
         elif action == "menu":
             from screens.title_screen import TitleScreen
             self.set_screen(TitleScreen(self))
 
-        # Game Over → Restart in same mode
         elif action == "restart":
             from screens.game_screen import GameScreen
             self.set_screen(GameScreen(self, mode=self.pending_mode))
 
         # Highscore Screen
-        # elif action == "scores":
-        #     from screens.scores_screen import ScoresScreen
-        #     self.set_screen(ScoresScreen(self))
+        elif action == "scores":
+            from screens.scores_screen import ScoresScreen
+            self.set_screen(ScoresScreen(self))
 
 
 def main():

@@ -4,7 +4,7 @@ from game.pipes import Pipes
 from game.ground import Ground
 from ai.population import Population
 from game.manual_player import ManualPlayer
-
+from utils.highscore_manager import HighscoreManager
 
 class GameScreen:
     def __init__(self, game, mode="manual"):
@@ -12,6 +12,7 @@ class GameScreen:
         self.game = game
         self.screen = game.screen
         self.mode = mode
+        self.score = 0
 
         config.pipes.clear()
         config.ground = Ground(config.window_width)
@@ -50,6 +51,7 @@ class GameScreen:
         self.spawn_pipes()
         self.update_pipes()
         self.update_ground()
+        self.update_score()
 
         action = self.update_players()
         return action
@@ -71,6 +73,8 @@ class GameScreen:
         else:
             self.population.draw_live_players(self.screen)
 
+        self.draw_score()
+
 
     def spawn_pipes(self):
 
@@ -91,6 +95,27 @@ class GameScreen:
     def update_ground(self):
         config.ground.update()
 
+    def update_score(self):
+
+        if self.mode != "manual":
+            return
+
+        for pipe in config.pipes:
+            pipe_right = pipe.x + pipe.bottom_rect.width
+
+            if pipe_right < self.player.rect.left and not pipe.scored:
+                self.score += 1
+                pipe.scored = True
+
+    def draw_score(self):
+
+        if not self.started:
+            return
+
+        font = pygame.font.Font(None, 56)
+        score_surface = font.render(str(self.score), True, (255, 255, 255))
+        score_rect = score_surface.get_rect(center=(config.window_width // 2, 60))
+        self.screen.blit(score_surface, score_rect)
 
     def update_players(self):
 
@@ -101,7 +126,8 @@ class GameScreen:
                 self.player.update(config.ground)
 
             if self.check_collision(self.player):
-                self.game.last_score = self.player.score
+                self.game.last_score = self.score
+                HighscoreManager.save_score(self.score, self.mode)
                 return "game_over"
 
             return None
