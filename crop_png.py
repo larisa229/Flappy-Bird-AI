@@ -1,7 +1,7 @@
 from PIL import Image
 import os
 
-files = ["C:/Users/Nicola/Downloads/bird1.png", "C:/Users/Nicola/Downloads/bird2.png", "C:/Users/Nicola/Downloads/bird3.png"]
+files = ["C:/Users/Nicola/Downloads/rainbow_bird1.png", "C:/Users/Nicola/Downloads/rainbow_bird2.png", "C:/Users/Nicola/Downloads/rainbow_bird3.png"]
 
 
 for f in files:
