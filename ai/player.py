@@ -9,13 +9,47 @@ class Player:
     def __init__(self):
         # Bird
         self.x, self.y = 50, 200
-        self.color = (255, 255, 0)
+        self.color = (255, 0, 0)
+        bird_color_sets = {
+            "yellow": [
+                "assets/birds/cropped_bird1.png",
+                "assets/birds/cropped_bird2.png",
+                "assets/birds/cropped_bird3.png",
+            ],
+            "blue": [
+                "assets/birds/cropped_blue_bird1.png",
+                "assets/birds/cropped_blue_bird2.png",
+                "assets/birds/cropped_blue_bird3.png",
+            ],
+            "green": [
+                "assets/birds/cropped_green_bird1.png",
+                "assets/birds/cropped_green_bird2.png",
+                "assets/birds/cropped_green_bird3.png",
+            ],
+            "orange": [
+                "assets/birds/cropped_orange_bird1.png",
+                "assets/birds/cropped_orange_bird2.png",
+                "assets/birds/cropped_orange_bird3.png",
+            ],
+            "pink": [
+                "assets/birds/cropped_pink_bird1.png",
+                "assets/birds/cropped_pink_bird2.png",
+                "assets/birds/cropped_pink_bird3.png",
+            ],
+            "rainbow": [
+                "assets/birds/cropped_rainbow_bird1.png",
+                "assets/birds/cropped_rainbow_bird2.png",
+                "assets/birds/cropped_rainbow_bird3.png",
+            ]
+        }
+
+        chosen_color = random.choice(list(bird_color_sets.keys()))
 
         self.frames = [
-            pygame.image.load("assets/cropped_bird1.png").convert_alpha(),
-            pygame.image.load("assets/cropped_bird2.png").convert_alpha(),
-            pygame.image.load("assets/cropped_bird3.png").convert_alpha(),
+            pygame.image.load(frame).convert_alpha()
+            for frame in bird_color_sets[chosen_color]
         ]
+
         self.frame = 0
         self.frame_timer = 0
         self.frame_speed = 7
@@ -85,7 +119,7 @@ class Player:
     def bird_flap(self):
         if not self.flap and not self.sky_collision():
             self.flap = True
-            self.vel = -5
+            self.vel = -6
             SoundManager.play_flap()
 
         if self.vel >= 3:

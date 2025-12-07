@@ -15,17 +15,17 @@ class TitleScreen:
 
     def load_assets(self):
         self.background = pygame.image.load("assets/day.png").convert()
-        self.title_img = pygame.image.load("assets/title.png").convert_alpha()
+        self.title_img = pygame.image.load("assets/text/title.png").convert_alpha()
 
         self.bird_frames = [
-            pygame.image.load("assets/bird1.png").convert_alpha(),
-            pygame.image.load("assets/bird2.png").convert_alpha(),
-            pygame.image.load("assets/bird3.png").convert_alpha(),
+            pygame.image.load("assets/birds/bird1.png").convert_alpha(),
+            pygame.image.load("assets/birds/bird2.png").convert_alpha(),
+            pygame.image.load("assets/birds/bird3.png").convert_alpha(),
         ]
 
-        self.btn_manual = pygame.image.load("assets/manual_btn.png").convert_alpha()
-        self.btn_auto = pygame.image.load("assets/auto_btn.png").convert_alpha()
-        self.btn_scores = pygame.image.load("assets/highscore_btn.png").convert_alpha()
+        self.btn_manual = pygame.image.load("assets/buttons/manual_btn.png").convert_alpha()
+        self.btn_auto = pygame.image.load("assets/buttons/auto_btn.png").convert_alpha()
+        self.btn_scores = pygame.image.load("assets/buttons/highscore_btn.png").convert_alpha()
 
 
     def create_ui(self):

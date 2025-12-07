@@ -29,12 +29,12 @@ class GameScreen:
         self.background = pygame.image.load("assets/day.png").convert()
 
         self.started = False
-        self.get_ready_img = pygame.image.load("assets/get_ready.png").convert_alpha()
+        self.get_ready_img = pygame.image.load("assets/text/get_ready.png").convert_alpha()
 
         center_x = self.screen.get_width() // 2
         self.get_ready_rect = self.get_ready_img.get_rect(center=(center_x, 250))
 
-        self.back_btn = pygame.image.load("assets/back_btn.png").convert_alpha()
+        self.back_btn = pygame.image.load("assets/buttons/back_btn.png").convert_alpha()
         self.back_btn_rect = self.back_btn.get_rect(topleft=(10, 10))
 
 

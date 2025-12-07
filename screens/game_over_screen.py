@@ -22,7 +22,7 @@ class GameOverScreen:
         self.bg = pygame.image.load("assets/day.png").convert()
         self.ground_img = pygame.image.load("assets/ground.png").convert_alpha()
         self.ground_y = config.window_height - self.ground_img.get_height()
-        self.game_over_img = pygame.image.load("assets/game_over.png").convert_alpha()
+        self.game_over_img = pygame.image.load("assets/text/game_over.png").convert_alpha()
         self.panel_img = pygame.image.load("assets/medal_score.png").convert_alpha()
 
         self.bronze_medal = pygame.image.load("assets/bronze_medal.png").convert_alpha()
@@ -30,9 +30,9 @@ class GameOverScreen:
         self.gold_medal = pygame.image.load("assets/gold_medal.png").convert_alpha()
         self.platinum_medal = pygame.image.load("assets/platinum_medal.png").convert_alpha()
 
-        self.btn_restart = pygame.image.load("assets/start_btn.png").convert_alpha()
-        self.btn_menu = pygame.image.load("assets/menu_btn.png").convert_alpha()
-        self.btn_highscore = pygame.image.load("assets/high_btn.png").convert_alpha()
+        self.btn_restart = pygame.image.load("assets/buttons/start_btn.png").convert_alpha()
+        self.btn_menu = pygame.image.load("assets/buttons/menu_btn.png").convert_alpha()
+        self.btn_highscore = pygame.image.load("assets/buttons/high_btn.png").convert_alpha()
 
 
     def create_ui(self):

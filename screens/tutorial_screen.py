@@ -19,20 +19,20 @@ class TutorialScreen:
         self.background = pygame.image.load("assets/day.png").convert()
 
         self.bird_frames = [
-            pygame.image.load("assets/bird1.png").convert_alpha(),
-            pygame.image.load("assets/bird2.png").convert_alpha(),
-            pygame.image.load("assets/bird3.png").convert_alpha(),
+            pygame.image.load("assets/birds/bird1.png").convert_alpha(),
+            pygame.image.load("assets/birds/bird2.png").convert_alpha(),
+            pygame.image.load("assets/birds/bird3.png").convert_alpha(),
         ]
 
         if self.mode == "manual":
-            self.tutorial_text = pygame.image.load("assets/manual_text.png").convert_alpha()
+            self.tutorial_text = pygame.image.load("assets/text/manual_text.png").convert_alpha()
             self.tap_icon = pygame.image.load("assets/tap_tut.png").convert_alpha()
         else:
-            self.tutorial_text = pygame.image.load("assets/auto_tut.png").convert_alpha()
+            self.tutorial_text = pygame.image.load("assets/text/auto_tut.png").convert_alpha()
             self.tap_icon = None
 
-        self.start_btn = pygame.image.load("assets/start_btn.png").convert_alpha()
-        self.back_btn = pygame.image.load("assets/back_btn.png").convert_alpha()
+        self.start_btn = pygame.image.load("assets/buttons/start_btn.png").convert_alpha()
+        self.back_btn = pygame.image.load("assets/buttons/back_btn.png").convert_alpha()
 
     def create_ui(self):
         screen_w = self.screen.get_width()

@@ -6,7 +6,7 @@ class Species:
     def __init__(self, player):
         self.players = []
         self.average_fitness = 0
-        self.threshold = 1.2 # maximum difference between networks to be considered similar
+        self.threshold = 1.5 # maximum difference between networks to be considered similar
         self.players.append(player)
 
         # the "representative" brain of the species

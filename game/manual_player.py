@@ -16,9 +16,9 @@ class ManualPlayer:
         self.score = 0
 
         self.frames = [
-            pygame.image.load("assets/cropped_bird1.png").convert_alpha(),
-            pygame.image.load("assets/cropped_bird2.png").convert_alpha(),
-            pygame.image.load("assets/cropped_bird3.png").convert_alpha(),
+            pygame.image.load("assets/birds/cropped_bird1.png").convert_alpha(),
+            pygame.image.load("assets/birds/cropped_bird2.png").convert_alpha(),
+            pygame.image.load("assets/birds/cropped_bird3.png").convert_alpha(),
         ]
 
         self.float_offset = 0

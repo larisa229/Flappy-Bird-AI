@@ -11,10 +11,10 @@ class ScoresScreen:
 
         self.bg = pygame.image.load("assets/day.png").convert()
 
-        self.back_btn = pygame.image.load("assets/back_btn.png").convert_alpha()
+        self.back_btn = pygame.image.load("assets/buttons/back_btn.png").convert_alpha()
         self.back_btn_rect = self.back_btn.get_rect(topleft=(10, 10))
 
-        self.menu_btn = pygame.image.load("assets/menu_btn.png").convert_alpha()
+        self.menu_btn = pygame.image.load("assets/buttons/menu_btn.png").convert_alpha()
         self.menu_rect = self.menu_btn.get_rect(
             center=(config.window_width // 2, config.window_height - 80)
         )
