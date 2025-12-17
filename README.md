@@ -5,11 +5,11 @@ This project is a Python implementation of the classic Flappy Bird game built wi
 ## Features
 - Fully playable Flappy Bird clone with animations, sound effects, and UI screens.
 - Two game modes:
-- - Manual Mode: Player-controlled bird using keyboard or mouse input.
+  - Manual Mode: Player-controlled bird using keyboard or mouse input.
   - Auto Mode: AI-controlled birds trained over generations.
 - Perceptron-based neural network with sigmoid activation for decision-making.
 - Genetic algorithm approach with:
-- - Fitness evaluation based on survival time.
+  - Fitness evaluation based on survival time.
   - Weight mutation and cloning.
   - Speciation to preserve diverse strategies.
 - Persistent high score tracking for both manual and AI modes.
